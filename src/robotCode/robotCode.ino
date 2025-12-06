@@ -18,13 +18,25 @@ float kdRight = 0.065;
 //----------------------------------------------
 
 #define speedRPM 60
+#define samplingTime .01
+
+SmartMotor motorLeft(0x0B);
+SmartMotor motorRight(0x0A);
+
+long unsigned int currentTime;
+long unsigned int previousTime;
+
+float motorLeftPos;
+float motorRightPos;
+float error;
+float totalError;
+float lastError;
 
 void setup() {
   Serial.begin(9600);
-  while (!Serial);
+  while (!Serial)
+    ;
 
-  SmartMotor motorLeft(0x0A);
-  SmartMotor motorRight(0x0B);
   Wire.begin();
 
   if (tuningSet) {
@@ -87,7 +99,8 @@ void setup() {
     Serial.println();
 
     while (1) {
-      ;;
+      ;
+      ;
     }
   }
 
@@ -95,8 +108,27 @@ void setup() {
   uint8_t statusRight = motorRight.write_rpm(speedRPM);
 }
 
+int angle = 0;
 void loop() {
+  currentTime = millis();
 
-  
+  motorLeft.write_angle((int32_t)(-output)); //fix these
+  motorRight.write_angle((int32_t)output);
 
+  if ((currentTime - previousTime) >= samplingTime) {
+    motorLeftPos = (float)motorLeft.read_angle();
+    motorRightPos = (float)motorRight.read_angle();
+
+    error = motorLeftPos - motorRightPos;
+    totalError += error;
+    deltaError = error - lastError;
+
+    int output = (Kp * error) + ((Kd / samplingTime) * deltaError) + ((Ki * samplingTime) * totalError);
+
+    statusLeft = motorLeft.write_rpm(speedRPM - output);
+    statusRight = motorRight.write_rpm(speedRPM + output);
+
+    lastError = error;
+    previousTime = currentTime;
+  }
 }
