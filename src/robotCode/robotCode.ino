@@ -20,19 +20,10 @@ float kdRight = 0.065;
 //----------------------------------------------
 
 #define speedRPM 60
-#define samplingTime .01
-
-long unsigned int currentTime;
-long unsigned int previousTime;
 
 float motorLeftPos;
 float motorRightPos;
 float error;
-float totalError;
-float lastError;
-float deltaError;
-
-float output;
 
 int32_t targetAngle = 1805;
 
@@ -87,23 +78,19 @@ void loop() {
 
       targetAngle = 1805;
 
-      if (!initaliseCode()) {
-        Serial.println("Setting state to FORWARD");
-        currentState = FORWARD;
-      }
+      if (!initaliseCode()) currentState = FORWARD;
       break;
 
     case FORWARD:
-      if (!forwardMovement()) {
-        Serial.println("Setting state to TURN");
-        currentState = TURN;
-      }
+      if (!forwardMovement()) currentState = TURN;
       break;
 
     case TURN:
+      if (!turnMovement()) currentState = REVERSE;
       break;
 
     case REVERSE:
+      if (!reverseMovement()) Serial.print("Done");
       break;
   }
 }
