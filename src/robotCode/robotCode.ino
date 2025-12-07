@@ -25,7 +25,8 @@ float motorLeftPos;
 float motorRightPos;
 float error;
 
-int32_t targetAngle = 1805;
+int32_t targetAngleRight = -1805;
+int32_t targetAngleLeft = 1805;
 
 typedef enum {
   TUNING,
@@ -84,11 +85,11 @@ void loop() {
 
     case TURN:
       Serial.print("TURN State");
-      if (!turnMovement()){}  //currentState = REVERSE;
+      if (!turnMovement()){currentState = REVERSE;}
         break;
 
     case REVERSE:
-      Serial.print("reVerse State");
+      Serial.println("reVerse State");
       if (!reverseMovement()) {Serial.print("Done");}
       break;
   }

@@ -6,17 +6,17 @@ int forwardMovement() {
   if (!forwardTempVar) {
     motorLeft.write_angle(0);
     motorRight.write_angle(0);
-    Serial.print("set the target angle to: ");
-    Serial.println(targetAngle);
+    /*Serial.print("set the target angle to: ");
+    Serial.println(targetAngle);*/
 
     while ((motorLeft.read_angle() != 0) && (motorRight.read_angle() != 0)){
       Serial.println(motorLeft.read_angle());
       Serial.println(motorRight.read_angle());
     }
-    motorLeft.write_angle(targetAngle);
-    motorRight.write_angle(-targetAngle);
-    Serial.print("set the target angle to: ");
-    Serial.println(targetAngle);
+    motorLeft.write_angle(targetAngleLeft);
+    motorRight.write_angle(targetAngleRight);
+    /*Serial.print("set the target angle to: ");
+    Serial.println(targetAngle);*/
 
     forwardTempVar += 1;
   }
@@ -26,7 +26,7 @@ int forwardMovement() {
   Serial.print("Right motor angle");
   Serial.println(motorRight.read_angle());
 
-  if ((motorLeft.read_angle() >= targetAngle) && (motorRight.read_angle() <= -targetAngle)) {
+  if ((motorLeft.read_angle() >= targetAngleLeft) && (motorRight.read_angle() <= targetAngleRight)) {
     return 0;
   }
 
