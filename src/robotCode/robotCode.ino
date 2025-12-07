@@ -18,9 +18,9 @@ float kiRight = 0.060;
 float kdRight = 0.065;
 
 float Kv = 1.0;
-float Kp = 0.65;
-float Ki = 0.060;
-float Kd = 0.065;
+float Kp = 0;
+float Ki = 0;
+float Kd = 0;
 //----------------------------------------------
 
 #define speedRPM 60
@@ -48,15 +48,13 @@ typedef enum {
   REVERSE
 } States;
 
-States currentState = INITALISE;
 
+States currentState = INITALISE;
 void setup() {
   Serial.begin(9600);
   while (!Serial)
     ;
   Wire.begin();
-
-  if (tuningSet) currentState = TUNING;
 }
 
 void loop() {
@@ -77,6 +75,11 @@ void loop() {
 
   float output;
 
+  if (tuningSet) {
+    currentState = TUNING;
+    Serial.println("Setting state to TUNING");
+  }
+
   switch (currentState) {
     case TUNING:
       tuningSetup();
@@ -88,11 +91,17 @@ void loop() {
 
       targetAngle = 1805;
 
-      if (!initaliseCode()) currentState = FORWARD;
+      if (!initaliseCode()) {
+        Serial.println("Setting state to FORWARD");
+        currentState = FORWARD;
+      }
       break;
 
     case FORWARD:
-      if(!forwardMovement()) currentState = TURN;
+      if (!forwardMovement()) {
+        Serial.println("Setting state to TURN");
+        currentState = TURN;
+      }
       break;
 
     case TURN:

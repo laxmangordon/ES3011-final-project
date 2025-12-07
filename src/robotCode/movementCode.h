@@ -7,7 +7,7 @@ int tuningSetup();
 int initaliseCode();
 int forwardMovement();
 
-SmartMotor motorLeft(0x0B);
-SmartMotor motorRight(0x0A);
+SmartMotor motorRight(0x0B);
+SmartMotor motorLeft(0x0A);
 
 #endif
