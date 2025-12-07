@@ -17,10 +17,6 @@ float kpRight = 0.65;
 float kiRight = 0.060;
 float kdRight = 0.065;
 
-float Kv = 1.0;
-float Kp = 0;
-float Ki = 0;
-float Kd = 0;
 //----------------------------------------------
 
 #define speedRPM 60
@@ -86,8 +82,8 @@ void loop() {
       break;
 
     case INITALISE:
-      statusLeft = motorLeft.write_rpm(speedRPM * Kv);
-      statusRight = motorRight.write_rpm(speedRPM * Kv);
+      statusLeft = motorLeft.write_rpm(speedRPM);
+      statusRight = motorRight.write_rpm(speedRPM);
 
       targetAngle = 1805;
 
