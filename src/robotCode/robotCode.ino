@@ -50,10 +50,6 @@ void loop() {
 
   float motorLeftPos;
   float motorRightPos;
-  float error;
-  float totalError;
-  float lastError;
-  float deltaError;
 
   int32_t targetAngle;
 
