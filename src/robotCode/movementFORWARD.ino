@@ -26,7 +26,7 @@ int forwardMovement() {
   Serial.print("Right motor angle");
   Serial.println(motorRight.read_angle());
 
-  if ((motorLeft.read_angle() == targetAngle) && (motorRight.read_angle() == -targetAngle)) {
+  if ((motorLeft.read_angle() >= targetAngle) && (motorRight.read_angle() <= -targetAngle)) {
     return 0;
   }
 

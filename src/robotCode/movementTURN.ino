@@ -4,8 +4,8 @@ int turnMovement() {
   static int turnTempVar = 0;
 
   if (!turnTempVar) {
-    motorLeft.write_angle(targetAngle - 252);
-    motorRight.write_angle(targetAngle - 252);
+    motorLeft.write_angle(targetAngle - 600);
+    motorRight.write_angle(-targetAngle - 600);
     turnTempVar += 1;
   }
 

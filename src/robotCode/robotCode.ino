@@ -74,19 +74,22 @@ void loop() {
 
       targetAngle = 1805;
 
-      if (!initaliseCode()) currentState = FORWARD;
+      if (!initaliseCode()) {currentState = FORWARD;}
       break;
 
     case FORWARD:
-      if (!forwardMovement()) currentState = TURN;
+      Serial.print("FORWARD State");
+      if (!forwardMovement()) {currentState = TURN;}
       break;
 
     case TURN:
-      if (!turnMovement()) currentState = REVERSE;
-      break;
+      Serial.print("TURN State");
+      if (!turnMovement()){}  //currentState = REVERSE;
+        break;
 
     case REVERSE:
-      if (!reverseMovement()) Serial.print("Done");
+      Serial.print("reVerse State");
+      if (!reverseMovement()) {Serial.print("Done");}
       break;
   }
 }
