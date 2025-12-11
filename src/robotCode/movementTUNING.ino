@@ -1,8 +1,7 @@
 #include "movementCode.h"
 
 int tuningSetup() {
-  motorLeft.tune_pos_pid(kpLeft, kiLeft, kdLeft);
-  motorRight.tune_pos_pid(kpRight, kiRight, kdRight);
+
   delay(1000);
 
   Gains pos_gains_left = motorLeft.get_pos_gains();
@@ -58,8 +57,8 @@ int tuningSetup() {
   Serial.println(vel_gains_right.kd);
   Serial.println();
 
-  while (1) {
+  /*while (1) {
     NOP;
-  }
+  }*/
   return 0;
 }
