@@ -16,7 +16,7 @@ int turnMovement() {
   // Serial.print("Left Motor: ");
   //Serial.println(motorLeft.read_angle());
 
-  if ((currentTime - previousTime) > 6000) {
+  if ((currentTime - previousTime) > 1820) {
     previousTime = currentTime;
     return 0;
   }

@@ -23,10 +23,10 @@ float kdRight = .5;
 //----------------------------------------------
 
 int32_t speedRPMLeft = 100;
-int32_t speedRPMRight = -145;
+int32_t speedRPMRight = -105;
 
 int32_t speedRPMLeftTurn = 100;
-int32_t speedRPMRightTurn = 145;
+int32_t speedRPMRightTurn = 105;
 
 int32_t speedOFF = 0;
 
@@ -92,7 +92,7 @@ void loop() {
 
     case FORWARD:
       //Serial.println("FORWARD State");
-      if (!forwardMovement()) {currentState = TURN; }
+      if (!forwardMovement()) {currentState = TURN;}
       break;
 
     case TURN:
